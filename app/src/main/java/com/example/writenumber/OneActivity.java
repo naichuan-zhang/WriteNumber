@@ -10,12 +10,15 @@ import android.media.PlaybackParams;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+
+import com.example.writenumber.util.mCustomProgressDialog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,25 +28,26 @@ import java.util.TimerTask;
 public class OneActivity extends Activity {
 
     private ImageView iv_frame;
-    int i = 1;
-    float x1;
-    float y1;
-    float x2;
-    float y2;
-    float x3;
-    float y3;
-    int igvx;
-    int igvy;
-    int type = 0;
-    int widthPixels;
-    int heightPixels;
-    float scaleWidth;
-    float scaleHeight;
+    int i = 1;      // 图片展示到第i张
+    float x1;       // 屏幕按下时的x值
+    float y1;       // 屏幕按下时的y值
+    float x2;       // 屏幕离开时的x值
+    float y2;       // 屏幕离开时的y值
+    float x3;       // 移动中的坐标的x值
+    float y3;       // 移动中的坐标的y值
+    int igvx;       // 图片x坐标
+    int igvy;       // 图片y坐标
+    int type = 0;   // 是否可以书写
+    int widthPixels;    // 屏幕宽度
+    int heightPixels;   // 屏幕高度
+    float scaleWidth;   // 宽度的缩放比例
+    float scaleHeight;  // 高度的缩放比例
     Timer touchTimer = null;
     Bitmap arrdown;
     boolean typedialog = true;
     private LinearLayout linearLayout = null;
     MediaPlayer mediaPlayer;
+    public mCustomProgressDialog mdialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,11 +114,13 @@ public class OneActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        x1 = event.getX();
-                        x2 = event.getY();
-                        igvx = iv_frame.getLeft();
+                        x1 = event.getX();      // 手指按下的坐标
+                        y1 = event.getY();
+                        igvx = iv_frame.getLeft();  // 手指按下图片的坐标
                         igvy = iv_frame.getTop();
 
+                        Log.i("TAG", "x1:" + x1 + "y1:" + y1 + "igvx:" + igvx + "igvy:" + igvy);
+                        // 判断当手指按下的坐标大于图片位置的坐标时, 证明手指按住移动, 此时开始书写
                         if (x1 >= igvx && x1 <= igvx + (int) (arrdown.getWidth() * scaleWidth)
                                         && y1 >= igvy & y1 <= igvy + (int) (arrdown.getWidth() * scaleWidth)) {
                             type = 1;
@@ -130,8 +136,61 @@ public class OneActivity extends Activity {
                         y2 = event.getY();
 
                         if (type == 1) {
-                            // TODO: write number here ......
+                            if (x2 >= igvx && x2 <= igvx + (int) (arrdown.getWidth() * scaleWidth)) {
+                                if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 && y2 >= igvy) {
+                                    lodimagep(1);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 2) {
+                                    lodimagep(2);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 3) {
+                                    lodimagep(3);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 4) {
+                                    lodimagep(4);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 5) {
+                                    lodimagep(5);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 6) {
+                                    lodimagep(6);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 7) {
+                                    lodimagep(7);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 8) {
+                                    lodimagep(8);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 9) {
+                                    lodimagep(9);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 10) {
+                                    lodimagep(10);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 11) {
+                                    lodimagep(11);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 12) {
+                                    lodimagep(12);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 13) {
+                                    lodimagep(13);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 14) {
+                                    lodimagep(14);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 15) {
+                                    lodimagep(15);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 16) {
+                                    lodimagep(16);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 17) {
+                                    lodimagep(17);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 18) {
+                                    lodimagep(18);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 19) {
+                                    lodimagep(19);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 20) {
+                                    lodimagep(20);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 21) {
+                                    lodimagep(21);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 22) {
+                                    lodimagep(22);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 23) {
+                                    lodimagep(23);
+                                } else if (y2 <= igvy + (int) (arrdown.getHeight() * scaleHeight) / 24 * 24) {
+                                    lodimagep(24);
+                                } else {
+                                    type = 0;
+                                }
+                            }
                         }
+                        break;
 
                     case MotionEvent.ACTION_UP:
                         type = 0;
@@ -233,5 +292,12 @@ public class OneActivity extends Activity {
             }
         });
         builder.create().show();
+    }
+
+    public void OnYS(View view) {
+        if (mdialog == null) {
+            mdialog = new mCustomProgressDialog(this, "演示中单击边缘取消", R.drawable.frame1);
+        }
+        mdialog.show();
     }
 }
