@@ -22,7 +22,7 @@
         android:id="@+id/btn_music"
         android:layout_alignParentBottom="true"
         android:layout_margin="10dp"
-        android:background="@drawable/btn_music1"
+        android:background="@drawable/music_btn"
         android:onClick="OnMusic" />
 
     <Button
@@ -32,7 +32,7 @@
         android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/btn_about1"
+        android:background="@drawable/about_btn"
         android:onClick="OnAbout"
         android:layout_alignParentEnd="true" />
 

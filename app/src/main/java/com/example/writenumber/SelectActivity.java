@@ -5,52 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.PlaybackParams;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
-// extends Activity in order to use FullScreen
-public class MainActivity extends Activity {
+import static com.example.writenumber.MainActivity.isPlay;
 
-    static boolean isPlay = true;
+public class SelectActivity extends Activity {
+
     MediaPlayer mediaPlayer;
-    Button music_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_select);
 
-        music_btn = findViewById(R.id.btn_music);
-        PlayMusic();
+        if (isPlay)
+            PlayMusic();
     }
 
     private void PlayMusic() {
         mediaPlayer = MediaPlayer.create(this, R.raw.main_music);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
-    }
-
-    public void OnPlay(View view) {
-        startActivity(new Intent(MainActivity.this, SelectActivity.class));
-    }
-
-    public void OnMusic(View view) {
-        if (isPlay) {
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                music_btn.setBackgroundResource(R.drawable.btn_music2);
-                isPlay = false;
-            }
-        } else {
-            PlayMusic();
-            music_btn.setBackgroundResource(R.drawable.btn_music1);
-            isPlay = true;
-        }
-    }
-
-    public void OnAbout(View view) {
-        startActivity(new Intent(MainActivity.this, AboutActivity.class));
     }
 
     @Override
@@ -77,5 +54,36 @@ public class MainActivity extends Activity {
         if (isPlay) {
             PlayMusic();
         }
+    }
+
+    public void OnOne(View view) {
+        startActivity(new Intent(SelectActivity.this, OneActivity.class));
+    }
+
+    public void OnTwo(View view) {
+    }
+
+    public void OnThree(View view) {
+    }
+
+    public void OnFour(View view) {
+    }
+
+    public void OnFive(View view) {
+    }
+
+    public void OnSix(View view) {
+    }
+
+    public void OnSeven(View view) {
+    }
+
+    public void OnEight(View view) {
+    }
+
+    public void OnNine(View view) {
+    }
+
+    public void onZero(View view) {
     }
 }
